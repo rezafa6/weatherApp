@@ -4,11 +4,10 @@
     backdrop-filter: blur(10.3px);
     -webkit-backdrop-filter: blur(10.3px);
     background: rgba(27, 21, 21, 0.2);
-
-    // background-color: #ccc;
 }
 
 .search-box {
+    top: 0;
     // custom effect color after focus on input (underline)
     .mat-form-field.mat-focused .mat-form-field-ripple {
         background-color: $orange_color !important;
@@ -25,23 +24,52 @@
       .mat-form-field-appearance-legacy .mat-form-field-underline {
           background-color: $white_color !important; 
       }
-      
+      .submit-btn {
+          background-color: $orange_color;
+      }
 }
 
-.suggested-locations {
-    button {
-        color:$white_color ;
-        transition: 0.3s;
-    }
-    button:hover {
-        background-color: $orange_color;
-        color: #fff;
-    }
+.result-of-search {
+width: 87%;
+z-index: 999;
+top: 70px;
+left: 30px;
+background-color: #fefefe;
+animation: searchResultAnimation 0.5s;
+#loading {
+    color : $orange_color ;
+    margin: 0 auto;
 }
+}
+
 .line-after-list {
     display: block;
     background-color: $white_color;  width: 85%;
 }
 .list-title {
     cursor: default;
+}
+
+//style of scrollbar
+::-webkit-scrollbar {
+    width: 4px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  ::-webkit-scrollbar-thumb {
+    background:$orange_color; 
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #777; 
+  }
+
+// animations
+
+@keyframes searchResultAnimation {
+    from {opacity: 0; clip-path: inset(0 0 100% 0);}
+    to {opacity: 1; clip-path: inset(0 0 0 0);}
 }

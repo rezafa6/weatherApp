@@ -1,32 +1,44 @@
 
-<div class="right-side-card h-100">
+<div class="right-side-card h-100 position-relative overflow-auto rounded">
     
     <!-- search box in order to search location (city name) -->
-    <div class="search-box default-padding">
+    <div class="search-box default-padding d-flex align-items-center ">
             <mat-form-field class="w-100">
-              <input matInput placeholder="Search Location ..."  autocomplete="off">
+              <input matInput placeholder="Search Location ..."  autocomplete="off" class="text-white"
+              (keyup)="search($event)">
             </mat-form-field>
     </div>
-    <!-- end of search box -->
+
+    <!-- panel for display result of search : it apears if the input has value -->
+    <div class="result-of-search shadow-lg default-padding position-absolute rounded" 
+    *ngIf="searchValue.length" >
+
+    <!-- loading apears after send request to api -->
+      <div class="spinner-border d-block text-center" id="loading" *ngIf="searchLoadng" role="status">
+        <span class="sr-only"></span>
+      </div>
+      <!-- result of search : location names -->
+      <div *ngFor="let result of locationBasicData" class="text-white">
+        <button mat-button class="text-dark button-effect"
+        (click)="getLocationWeather(result.woeid)"> {{result.title}} </button>
+      </div>
+      <!-- if there is no location maches with input value -->
+      <span class="d-block text-dark" *ngIf="!searchLoadng && !locationBasicData.length"> no location found with this name </span>
+    </div>
+
+    <!-- end of search  -->
     
     <!-- suggested locations  -->
     <div class="suggested-locations default-padding d-flex flex-column align-items-start" >
       <span class="text-white list-title"> Suggested Locations </span>
       <br>
-      <button mat-button *ngFor="let sugestedLocation of suggestedLocations">
+      <button class="button-effect" mat-button *ngFor="let sugestedLocation of suggestedLocations">
         {{sugestedLocation.title}}  
       </button>
     </div>
+    <!-- line -->
     <hr class="line-after-list">
-    <div class="weather-details-wrapper default-padding d-flex flex-column align-items-start" >
-      <span class="text-white list-title"> Weather Details </span>
-      <br>
-     
-      <div class="text-white d-flex justify-content-between w-100" style="background-color: red;">
-        <span>Cloudy</span>
-        <span>86%</span>
-      </div>
-      
-    </div>
+
+    <app-weather-details #detailsRef [weatherData] = 'weatherData'></app-weather-details>
 
 </div>

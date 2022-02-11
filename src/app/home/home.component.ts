@@ -6,10 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-
+  weatherDataFromRightSection : any
   constructor() { }
 
   ngOnInit(): void {
   }
-
+  getDataFromRightSection(data: any) {
+    // get data from right section component and send it to left section component
+    this.weatherDataFromRightSection = data
+    console.log(data , 'faqaaaaaaaaaa')
+  }
 }

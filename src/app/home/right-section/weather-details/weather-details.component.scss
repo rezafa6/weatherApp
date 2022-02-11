@@ -1,0 +1,10 @@
+@import '../../../../assets/variables';
+.weather-details-wrapper {
+    border-bottom: 1px solid $white_color ;
+}
+.weather-details-wrapper:nth-last-child(1) {
+    border-bottom: none;
+}
+.w-details {
+    padding: 12px 0;
+}

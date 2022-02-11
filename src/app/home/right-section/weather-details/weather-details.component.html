@@ -1,0 +1,29 @@
+<!-- details of weather report -->
+<div *ngIf="weatherData">
+  <div class="weather-details-wrapper default-padding d-flex flex-column align-items-start"
+ *ngFor="let item of weatherData.consolidated_weather" >
+    <span class="text-white list-title "> Weather Details of {{item?.applicable_date}}  </span>
+    <br>
+   
+    <div class="text-white d-flex justify-content-between w-100 w-details" >
+      <span>State</span>
+      <span>{{item.weather_state_name}}</span>
+    </div>
+
+    <div class="text-white d-flex justify-content-between w-100 w-details" >
+      <span>Humidity</span>
+      <span>{{item.humidity}}%</span>
+    </div>
+
+    <div class="text-white d-flex justify-content-between w-100 w-details" >
+      <span>Wind Speed</span>
+      <span>{{item.wind_speed.toString().substring(0,4)}} Km/h</span>
+    </div>
+
+    <div class="text-white d-flex justify-content-between w-100 w-details" >
+      <span>Wind Direction</span>
+      <span>{{item.wind_direction_compass}}</span>
+    </div>
+    
+  </div>
+</div>

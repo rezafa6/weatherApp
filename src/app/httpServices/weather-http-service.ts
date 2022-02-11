@@ -14,7 +14,23 @@ export class WeatherHttpService {
         )
     })
     }
-
+    getLocationDetailByName(locationName: string) {
+        return new Promise((resolve , reject) => {
+            this.http.get(this.baseURL + 'search/?query=' + locationName).subscribe(
+                res => {resolve(res)},
+                err => {reject(err)}
+            )
+        })
+        }
+    
+        getLocationWeatherByWoeId(locationName: string) {
+            return new Promise((resolve , reject) => {
+                this.http.get(this.baseURL + locationName).subscribe(
+                    res => {resolve(res)},
+                    err => {reject(err)}
+                )
+            })
+            }
 
     getW() {
         return new Promise((resolve , reject) => {
