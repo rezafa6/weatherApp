@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  baseUrl : 'https://www.metaweather.com/api/location/',
+  weatherIconsPath: 'https://www.metaweather.com/static/img/weather/'
 };
 
 /*
