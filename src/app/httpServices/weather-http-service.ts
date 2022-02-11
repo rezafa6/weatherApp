@@ -8,7 +8,7 @@ export class WeatherHttpService {
     baseURL = environment.baseUrl
     getData() {
     return new Promise((resolve , reject) => {
-        this.http.get(this.baseURL + 'search/?query=Toronto').subscribe(
+        this.http.get(this.baseURL + 'search/?query=Amsterdam').subscribe(
             res => {resolve(res)},
             err => {reject(err)}
         )
@@ -18,7 +18,7 @@ export class WeatherHttpService {
 
     getW() {
         return new Promise((resolve , reject) => {
-            this.http.get(this.baseURL + '4118').subscribe(
+            this.http.get(this.baseURL + '2444674').subscribe(
                 res => {resolve(res)},
                 err => {reject(err)}
             )

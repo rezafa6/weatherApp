@@ -1,0 +1,47 @@
+@import '../../../assets/variables.scss' ;
+
+.right-side-card {
+    backdrop-filter: blur(10.3px);
+    -webkit-backdrop-filter: blur(10.3px);
+    background: rgba(27, 21, 21, 0.2);
+
+    // background-color: #ccc;
+}
+
+.search-box {
+    // custom effect color after focus on input (underline)
+    .mat-form-field.mat-focused .mat-form-field-ripple {
+        background-color: $orange_color !important;
+      }
+      // custom effect color after focus on input (placeholder)
+      .mat-form-field.mat-focused .mat-form-field-label {
+          color: $orange_color !important;
+      }
+      //   custom placeholder color
+      .mat-form-field-label {
+          color: $white_color ;
+      }
+     // custom underline color
+      .mat-form-field-appearance-legacy .mat-form-field-underline {
+          background-color: $white_color !important; 
+      }
+      
+}
+
+.suggested-locations {
+    button {
+        color:$white_color ;
+        transition: 0.3s;
+    }
+    button:hover {
+        background-color: $orange_color;
+        color: #fff;
+    }
+}
+.line-after-list {
+    display: block;
+    background-color: $white_color;  width: 85%;
+}
+.list-title {
+    cursor: default;
+}

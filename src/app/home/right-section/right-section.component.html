@@ -1,0 +1,32 @@
+
+<div class="right-side-card h-100">
+    
+    <!-- search box in order to search location (city name) -->
+    <div class="search-box default-padding">
+            <mat-form-field class="w-100">
+              <input matInput placeholder="Search Location ..."  autocomplete="off">
+            </mat-form-field>
+    </div>
+    <!-- end of search box -->
+    
+    <!-- suggested locations  -->
+    <div class="suggested-locations default-padding d-flex flex-column align-items-start" >
+      <span class="text-white list-title"> Suggested Locations </span>
+      <br>
+      <button mat-button *ngFor="let sugestedLocation of suggestedLocations">
+        {{sugestedLocation.title}}  
+      </button>
+    </div>
+    <hr class="line-after-list">
+    <div class="weather-details-wrapper default-padding d-flex flex-column align-items-start" >
+      <span class="text-white list-title"> Weather Details </span>
+      <br>
+     
+      <div class="text-white d-flex justify-content-between w-100" style="background-color: red;">
+        <span>Cloudy</span>
+        <span>86%</span>
+      </div>
+      
+    </div>
+
+</div>

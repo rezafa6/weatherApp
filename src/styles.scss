@@ -1,8 +1,8 @@
 /* Importing Bootstrap SCSS file. */
 @import "~bootstrap/scss/bootstrap";
 // /* Importing Datepicker SCSS file. */
-// @import "~ngx-bootstrap/datepicker/bs-datepicker";
-
+@import "~ngx-bootstrap/datepicker/bs-datepicker";
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 // general styles
 html, body { height: 100%; }
 body { 
@@ -15,4 +15,12 @@ body {
     background-image: url('./assets/imgs/bg.jpg');
     background-size: cover;
     background-repeat: no-repeat;
+    background-position: fixed;
+    }
+
+    .none-padding{
+    padding: 0 !important;
+    }
+    .default-padding {
+        padding: 20px 30px;
     }
