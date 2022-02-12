@@ -6,24 +6,27 @@
 
             <div class="d-flex align-items-center ">
 
-                <div *ngFor="let item of weatherData.consolidated_weather ; let i = index">
-                    <div *ngIf="i == currentDay" class="d-flex align-items-center ">
+                <div *ngFor="let item of weatherData.consolidated_weather ; let index = index">
+                    <div *ngIf="index== currentDay" class="d-flex align-items-center ">
 
                         <!-- back to last day -->
-                        <button mat-button (click)="goToPrevDay(i)" class="button-effect position-absolute"
-                            id="prevBtn">
+                        <button mat-button (click)="goToPrevDay(index)" class="button-effect position-absolute" id="prevBtn"
+                            matTooltip="Preview Day">
                             <mat-icon class="text-white">keyboard_arrow_left</mat-icon>
                         </button>
 
                         <!-- temperature degree : it remove float part -->
                         <div class="position-relative" style="right: 6px">
-                            <h1 class="temp-deg text-white position-relative fade-in-up">
-                                {{item.the_temp.toString().split('.')[0]}}</h1>
+                            <h1 class="temp-deg text-white position-relative fade-in-up" matTooltip="The Temp">
+                                {{item.the_temp.toString().split('.')[0]}}
+                            </h1>
                         </div>
                         <!-- time & date & weather title -->
                         <div class="middle-data text-white text-center">
                             <h1 id="cityName">{{weatherData?.title}}</h1>
-                            <span class="fade-in-up">{{time}}</span>
+                            <!-- sunrise time -->
+                            <span class="fade-in-up"
+                                matTooltip="Sunrise Time">{{weatherData.sun_rise.split('T')[1].substring(0,5)}}</span>
                             <span class="fade-in-up">{{today}}</span>
                             <span class="fade-in-up">{{item.applicable_date.slice(5).replace('-' , '/')}}</span>
                         </div>
@@ -31,7 +34,7 @@
                         <img class="fade-in-up" [src]="iconPath +item.weather_state_abbr + '.svg' " alt="state-icon"
                             width="50px" style="margin-left: 20px;">
                         <!-- go to next day -->
-                        <button mat-button (click)="goToNextDay(i)" id="nextBtn"
+                        <button mat-button (click)="goToNextDay(index)" id="nextBtn" matTooltip="Next Day"
                             class="button-effect position-absolute">
                             <mat-icon class="text-white">keyboard_arrow_right</mat-icon>
                         </button>

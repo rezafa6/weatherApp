@@ -25,7 +25,6 @@ export class LeftSectionComponent implements OnInit {
       this.currentDay ++;
     } 
   }
-
   
   goToPrevDay(currentDay: number) {
     if(currentDay <= 0) {
@@ -37,9 +36,9 @@ export class LeftSectionComponent implements OnInit {
 
   initDateAndTime() {
     const days = ['SUN' ,'MON', 'TUE' ,'WED','THU','FRI','SAT' ];
-    let date = new Date()
-    this.today = days[date.getDay()].toUpperCase()
-    this.time = `${date.getHours()}:${date.getMinutes()} `
+    let date = new Date();
+    this.today = days[date.getDay()];
+    this.time = `${date.getHours()}:${date.getMinutes()} `;
   }
 
 }

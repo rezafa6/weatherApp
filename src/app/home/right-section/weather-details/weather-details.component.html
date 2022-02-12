@@ -2,65 +2,74 @@
 <div *ngIf="weatherData" class="fade-in-up">
   <!-- details wrapper -->
   <div class="weather-details-wrapper default-padding d-flex flex-column align-items-start"
-
-    *ngFor="let item of weatherData.consolidated_weather ; let i = index">
+    *ngFor="let item of weatherData.consolidated_weather ; let index = index">
     <!-- details date -->
     <span class="text-white list-title "> Weather Details of {{item?.applicable_date}} </span>
     <br>
 
+    <!-- details State -->
     <div class="text-white d-flex justify-content-between w-100 w-details">
       <span>State</span>
       <span>{{item.weather_state_name}}</span>
     </div>
 
+    <!-- details Humidity -->
     <div class="text-white d-flex justify-content-between w-100 w-details">
       <span>Humidity</span>
       <span>{{item.humidity}}%</span>
     </div>
 
-
+    <!-- details Max Tepm -->
     <div class="text-white d-flex justify-content-between w-100 w-details">
       <span>Max Tepm</span>
-      <span>{{item.max_temp.toString().split('.')[0]}}</span>
+      <span>{{'+' + item.max_temp.toString().split('.')[0] + ' ' + 'deg'}}</span>
     </div>
-  
+
+    <!-- details Min Tepm -->
     <div class="text-white d-flex justify-content-between w-100 w-details">
       <span>Min Tepm</span>
-      <span>{{item.min_temp.toString().substring(0,4)}}</span>
+      <span>{{item.min_temp.toString().substring(0,4) + ' ' + 'deg'}}</span>
     </div>
+    <!-- end of details -->
 
-    <button mat-button class="text-white" id="moreBtn" (click)="openMorePanel(item , i)">
-    {{item.expand ? 'Less -' : 'More +'}}  
+    <!-- toggle details panel btn -->
+    <button mat-button class="text-white" id="moreBtn" (click)="openMorePanel(item , index)"
+      [matTooltip]="item.expand ? 'View Less Details' : 'View More Details'">
+      {{item.expand ? 'Less -' : 'More +'}}
     </button>
 
-
     <!-- more datails -->
+    <div id="panelElm{{index}}" class="w-100 overflow-hidden more">
 
- <div id="panelElm{{i}}" class="w-100 overflow-hidden more">
+      <!-- more datails Wind Speed -->
 
-  <div class="text-white d-flex justify-content-between w-100 w-details">
-    <span>Wind Speed</span>
-    <span>{{item.wind_speed.toString().substring(0,4)}} Km/h</span>
+      <div class="text-white d-flex justify-content-between w-100 w-details">
+        <span>Wind Speed</span>
+        <span>{{item.wind_speed.toString().substring(0,4)}} Km/h</span>
+      </div>
+
+      <!-- more datails Wind Direction -->
+
+      <div class="text-white d-flex justify-content-between w-100 w-details">
+        <span>Wind Direction</span>
+        <span>{{item.wind_direction_compass}}</span>
+      </div>
+
+      <!-- more datails Air Pressure -->
+
+      <div class="text-white d-flex justify-content-between  w-details">
+        <span>Air Pressure</span>
+        <span>{{item.air_pressure}}</span>
+      </div>
+      <!-- more datails Visibility -->
+      <div class="text-white d-flex justify-content-between  w-details">
+        <span>Visibility</span>
+        <span>{{item.visibility.toString().substring(0,4)}}</span>
+      </div>
+
+    </div>
+    <!-- end of more datails -->
   </div>
 
-  <div class="text-white d-flex justify-content-between w-100 w-details">
-    <span>Wind Direction</span>
-    <span>{{item.wind_direction_compass}}</span>
-  </div>
 
-  <div class="text-white d-flex justify-content-between  w-details">
-    <span>Air Pressure</span>
-    <span>{{item.air_pressure}}</span>
-  </div>
-
-  <div class="text-white d-flex justify-content-between  w-details">
-    <span>Visibility</span>
-    <span>{{item.visibility.toString().substring(0,4)}}</span>
-  </div>
-
- </div>
-
-  </div>
-
- 
 </div>

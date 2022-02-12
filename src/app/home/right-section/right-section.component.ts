@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
 import {  Subject } from 'rxjs';
 import { WeatherHttpService } from 'src/app/httpServices/weather-http-service';
 import { SuggestService } from './suggest-service';
@@ -12,6 +12,7 @@ import { tap, debounceTime } from 'rxjs/operators';
 })
 export class RightSectionComponent implements OnInit {
   // properties
+  @ViewChild('mainContent') panelElm !: ElementRef
   @Output() emitDataFormHomeCoponent = new EventEmitter();
   reactiveSearch = new Subject<string>();
   suggestedLocations: any[] = [];
@@ -20,6 +21,7 @@ export class RightSectionComponent implements OnInit {
   searchValue: string = '';
   weatherData: any ;
   loading: boolean = false;
+  isSticky: boolean = false;
   constructor(
     private suggestService: SuggestService,
     private weatherHttpService: WeatherHttpService
@@ -28,6 +30,11 @@ export class RightSectionComponent implements OnInit {
     window.addEventListener('click' , ()=> {this.searchValue =''} )
     }
 
+    onScroll(event: any) {
+    if( event.target.scrollTop > 100) {this.isSticky = true}
+    if(event.target.scrollTop < 100) {this.isSticky = false}
+    }
+  
   ngOnInit(): void {
     this.initSugestedLocations();
     this.initReactiveSearch();
@@ -60,11 +67,11 @@ export class RightSectionComponent implements OnInit {
     this.searchLoadng = true;
     this.weatherHttpService.getLocationDetailByName(value).then(
       res => {
-        this.searchLoadng = false;
         let tempData:any = res;
         this.locationBasicData = tempData;
-        // only show five items
-        this.locationBasicData  = this.locationBasicData.slice(0,5);
+        // only show six items
+        this.locationBasicData  = this.locationBasicData.slice(0,6);
+        this.searchLoadng = false;
       }
     )
   }
@@ -74,18 +81,18 @@ export class RightSectionComponent implements OnInit {
     let woeidToSrt = woeid.toString()
    this.weatherHttpService.getLocationWeatherByWoeId(woeidToSrt).then(
     res => {
-      console.log(res)
-      this.loading = false;
       let tempData: any = res;
       this.weatherData = tempData;
-      this.setExpandOptionForData()
-      console.log(this.weatherData , 'opop')
+       // set expand peroperty (boolean) for all data in order to toggle panle to see more details
+      this.setExpandOptionForData();
+      // set element scroll as default 
+      this.panelElm.nativeElement.scrollTo(0,0);
       // send data to parent : home component.ts
-      this.emitDataFormHomeCoponent.emit(this.weatherData)
+      this.emitDataFormHomeCoponent.emit(this.weatherData);
+      this.loading = false;
     }
   )
   }
-
   setExpandOptionForData() {
    this.weatherData.consolidated_weather.forEach((item: { expand: boolean; }) => {
     item.expand = false

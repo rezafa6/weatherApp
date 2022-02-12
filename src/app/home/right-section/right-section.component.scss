@@ -7,6 +7,7 @@
 }
 
 .search-box {
+    transition: 0.5s;
     top: 0;
     // custom effect color after focus on input (underline)
     .mat-form-field.mat-focused .mat-form-field-ripple {
@@ -27,6 +28,14 @@
       .submit-btn {
           background-color: $orange_color;
       }
+}
+// if scrollTop > 100 px
+.sticky-input {
+    top: 0;
+    z-index: 9999;
+    input {
+        color: #333 !important;
+    }
 }
 
 .result-of-search {

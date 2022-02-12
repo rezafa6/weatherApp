@@ -1,47 +1,49 @@
+<div class="right-side-card h-100 position-relative overflow-auto rounded" #mainContent (scroll)="onScroll($event)">
 
-<div class="right-side-card h-100 position-relative overflow-auto rounded">
-    
-    <!-- search box in order to search location (city name) -->
-    <div class="search-box default-padding d-flex align-items-center fade-in-up">
-            <mat-form-field class="w-100">
-              <input matInput placeholder="Search Location ..."  autocomplete="off" class="text-white"
-              (keyup)="search($event)">
-            </mat-form-field>
-    </div>
+  <!-- search box in order to search location (city name) -->
+  <div class="search-box default-padding d-flex align-items-center fade-in-up"
+    [ngClass]="[isSticky ? 'sticky-input bg-white position-sticky' : '' ]">
+    <mat-form-field class="w-100">
+      <input matInput placeholder="Search Location ..." autocomplete="off" class="text-white" (keyup)="search($event)">
+    </mat-form-field>
+
 
     <!-- panel for display result of search : it apears if the input has value -->
-    <div class="result-of-search shadow-lg default-padding position-absolute rounded " 
-    *ngIf="searchValue.length" >
+    <div class="result-of-search shadow-lg default-padding position-absolute rounded " *ngIf="searchValue.length">
 
-    <!-- loading apears after send request to api -->
+      <!-- loading apears after sendding request to api -->
       <div class="spinner-border d-block text-center" id="loading" *ngIf="searchLoadng" role="status">
         <span class="sr-only"></span>
       </div>
       <!-- result of search : location names -->
       <div *ngFor="let result of locationBasicData" class="text-white">
-        <button mat-button class="text-dark button-effect"
-        (click)="getLocationWeather(result.woeid)"> {{result.title}} </button>
+        <button mat-button class="text-dark button-effect" (click)="getLocationWeather(result.woeid)"> {{result.title}}
+        </button>
       </div>
       <!-- if there is no location maches with input value -->
-      <span class="d-block text-dark" *ngIf="!searchLoadng && !locationBasicData.length"> no location found with this name </span>
+      <span class="d-block text-muted" *ngIf="!searchLoadng && !locationBasicData.length">
+         no location found with this name </span>
     </div>
+  </div>
 
-    <!-- end of search  -->
-    
-    <!-- suggested locations  -->
-    <div class="suggested-locations default-padding d-flex flex-column align-items-start fade-in-up" >
-      <span class="text-white list-title"> Suggested Locations </span>
-      <br>
-      <button class="button-effect " (click)="getLocationWeather(sugestedLocation.woeid)"
-       mat-button *ngFor="let sugestedLocation of suggestedLocations">
-        {{sugestedLocation.title}}  
-      </button>
-    </div>
-    <!-- line -->
-    <hr class="line-after-list">
 
-    <!--  weather details & more -->
-    <app-weather-details [weatherData] = 'weatherData'></app-weather-details>
+
+  <!-- end of search  -->
+
+  <!-- suggested locations  -->
+  <div class="suggested-locations default-padding d-flex flex-column align-items-start fade-in-up">
+    <span class="text-white list-title"> Suggested Locations </span>
+    <br>
+    <button class="button-effect " (click)="getLocationWeather(sugestedLocation.woeid)" mat-button
+      *ngFor="let sugestedLocation of suggestedLocations">
+      {{sugestedLocation.title}}
+    </button>
+  </div>
+  <!-- line -->
+  <hr class="line-after-list">
+
+  <!--  weather details & more -->
+  <app-weather-details [weatherData]='weatherData'></app-weather-details>
 
 </div>
 
