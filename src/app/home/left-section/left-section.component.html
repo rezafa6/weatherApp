@@ -1,4 +1,4 @@
-<div class="left-side-card rounded position-relative " style="height: 100%;">
+<div class="left-side-card rounded position-relative h-100">
 
     <div *ngIf="weatherData">
 
@@ -10,9 +10,9 @@
                     <div *ngIf="index== currentDay" class="d-flex align-items-center ">
 
                         <!-- back to last day -->
-                        <button mat-button (click)="goToPrevDay(index)" class="button-effect position-absolute" id="prevBtn"
-                            matTooltip="Preview Day">
-                            <mat-icon class="text-white">keyboard_arrow_left</mat-icon>
+                        <button mat-button (click)="goToPrevDay(index)" class="button-effect position-absolute"
+                            id="prevBtn">
+                            <mat-icon matTooltip="Preview Day" class="text-white">keyboard_arrow_left</mat-icon>
                         </button>
 
                         <!-- temperature degree : it remove float part -->
@@ -21,7 +21,7 @@
                                 {{item.the_temp.toString().split('.')[0]}}
                             </h1>
                         </div>
-                        <!-- time & date & weather title -->
+                        <!-- sunrise time & date & weather title -->
                         <div class="middle-data text-white text-center">
                             <h1 id="cityName">{{weatherData?.title}}</h1>
                             <!-- sunrise time -->
@@ -31,8 +31,8 @@
                             <span class="fade-in-up">{{item.applicable_date.slice(5).replace('-' , '/')}}</span>
                         </div>
                         <!-- weather icon -->
-                        <img class="fade-in-up" [src]="iconPath +item.weather_state_abbr + '.svg' " alt="state-icon"
-                            width="50px" style="margin-left: 20px;">
+                        <img class="fade-in-up m-2" [src]="iconPath +item.weather_state_abbr + '.svg' " alt="state-icon"
+                            width="50px" >
                         <!-- go to next day -->
                         <button mat-button (click)="goToNextDay(index)" id="nextBtn" matTooltip="Next Day"
                             class="button-effect position-absolute">

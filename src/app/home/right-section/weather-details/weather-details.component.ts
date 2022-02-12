@@ -15,7 +15,8 @@ export class WeatherDetailsComponent implements OnInit {
   // toggle more panel
   openMorePanel(item: any , index: number) {
     item.expand = !item.expand
-    let panelElm = document.getElementById('panelElm' + index) as HTMLDivElement
+    let panelElm = document.getElementById('panelElm' + index) as HTMLDivElement;
+    
     if (item.expand) {
     panelElm.style.maxHeight= panelElm.scrollHeight + 'px';
     } else {

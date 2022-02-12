@@ -1,44 +1,51 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { DynamicDateService } from './dynamic-week-days';
 
 @Component({
   selector: 'app-left-section',
   templateUrl: './left-section.component.html',
-  styleUrls: ['./left-section.component.scss']
+  styleUrls: ['./left-section.component.scss'],
+  providers: [DynamicDateService]
 })
 export class LeftSectionComponent implements OnInit {
-  @Input() weatherData : any;
+  iconPath = environment.weatherIconsPath;
+  @Input() weatherData: any;
   currentDay: number = 0;
   today: string = '';
-  time: string = '';
-  iconPath = environment.weatherIconsPath;
-  constructor() { }
+
+  constructor(
+    private dynamicDateService: DynamicDateService
+  ) { }
 
   ngOnInit(): void {
-    this.initDateAndTime()
+    this.initDate()
+  }
+
+  initDate() {
+    this.today = this.dynamicDateService.initDate()
   }
 
   goToNextDay(currentDay: number) {
-    if(currentDay == this.weatherData.consolidated_weather.length - 1) {
+    if (currentDay == this.weatherData.consolidated_weather.length - 1) {
       this.currentDay = 0
     } else {
-      this.currentDay ++;
-    } 
-  }
-  
-  goToPrevDay(currentDay: number) {
-    if(currentDay <= 0) {
-      this.currentDay = this.weatherData.consolidated_weather.length - 1
-    } else {
-      this.currentDay --;
+      this.currentDay++;
     }
+
+    this.today = this.dynamicDateService.goToNextDayOfWeek()
   }
 
-  initDateAndTime() {
-    const days = ['SUN' ,'MON', 'TUE' ,'WED','THU','FRI','SAT' ];
-    let date = new Date();
-    this.today = days[date.getDay()];
-    this.time = `${date.getHours()}:${date.getMinutes()} `;
+  goToPrevDay(currentDay: number) {
+    if (currentDay <= 0) {
+      this.currentDay = this.weatherData.consolidated_weather.length - 1;
+    } else {
+      this.currentDay--;
+    }
+    this.today = this.dynamicDateService.goToLastDayOfWeek()
   }
+
 
 }
+
+

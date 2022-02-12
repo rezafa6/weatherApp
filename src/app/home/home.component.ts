@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { LeftSectionComponent } from './left-section/left-section.component';
 
 @Component({
   selector: 'app-home',
@@ -7,13 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
   weatherDataFromRightSection : any
-  constructor() { }
+  @ViewChild('leftSectionRef') leftSectionMethods !:  LeftSectionComponent
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
-  }
   getDataFromRightSection(data: any) {
     // get data from right section component and send it to left section component
-    this.weatherDataFromRightSection = data
-    console.log(data , 'faqaaaaaaaaaa')
+    this.weatherDataFromRightSection = data;
+    //set time & date as default
+    this.leftSectionMethods.initDate()
   }
 }

@@ -1,15 +1,18 @@
 <div class="container">
 
     <div class="row">
-
         <!-- left side component : img , summary of weather report , time & date -->
         <div class="col-lg-7 none-padding section-wrapper">
-            <app-left-section [weatherData] ="weatherDataFromRightSection"></app-left-section>
+            <app-left-section
+            #leftSectionRef
+            [weatherData] ="weatherDataFromRightSection"></app-left-section>
         </div>
 
         <!-- right side coponent : get weather details by searching city name & weather details -->
         <div class="col-lg-5 none-padding section-wrapper" >
-            <app-right-section (emitDataFormHomeCoponent)="getDataFromRightSection($event)"></app-right-section>
+            <app-right-section 
+            (emitDataFormHomeCoponent)="getDataFromRightSection($event)">
+        </app-right-section>
         </div>
 
     </div>

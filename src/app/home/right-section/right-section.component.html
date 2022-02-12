@@ -2,11 +2,11 @@
 
   <!-- search box in order to search location (city name) -->
   <div class="search-box default-padding d-flex align-items-center fade-in-up"
-    [ngClass]="[isSticky ? 'sticky-input bg-white position-sticky' : '' ]">
-    <mat-form-field class="w-100">
+    [ngClass]="[isSticky ? 'sticky-input bg-white shadow-lg position-sticky' : '' ]">
+   
+    <mat-form-field class="w-100" matTooltip="Enter Location Name">
       <input matInput placeholder="Search Location ..." autocomplete="off" class="text-white" (keyup)="search($event)">
     </mat-form-field>
-
 
     <!-- panel for display result of search : it apears if the input has value -->
     <div class="result-of-search shadow-lg default-padding position-absolute rounded " *ngIf="searchValue.length">
@@ -20,14 +20,14 @@
         <button mat-button class="text-dark button-effect" (click)="getLocationWeather(result.woeid)"> {{result.title}}
         </button>
       </div>
+
       <!-- if there is no location maches with input value -->
       <span class="d-block text-muted" *ngIf="!searchLoadng && !locationBasicData.length">
-         no location found with this name </span>
+         no location found with this name 
+      </span>
+
     </div>
   </div>
-
-
-
   <!-- end of search  -->
 
   <!-- suggested locations  -->
@@ -39,6 +39,7 @@
       {{sugestedLocation.title}}
     </button>
   </div>
+  
   <!-- line -->
   <hr class="line-after-list">
 
