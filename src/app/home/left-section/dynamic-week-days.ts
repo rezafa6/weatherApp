@@ -15,7 +15,7 @@ export class DynamicDateService {
     }
 
     //dynamic days of week : decrease
-    goToNextDayOfWeek() {
+    goToLastDayOfWeek() {
         let index = this.days.indexOf(this.today)
         if(index <= 0) {
           this.today = this.days[6]
@@ -30,7 +30,7 @@ export class DynamicDateService {
       }
 
     //dynamic days of week : increase
-    goToLastDayOfWeek() {
+    goToNextDayOfWeek() {
         let index = this.days.indexOf(this.today)
         // 
         if(index < 6) {
