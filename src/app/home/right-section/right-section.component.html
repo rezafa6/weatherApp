@@ -2,7 +2,7 @@
 <div class="right-side-card h-100 position-relative overflow-auto rounded">
     
     <!-- search box in order to search location (city name) -->
-    <div class="search-box default-padding d-flex align-items-center ">
+    <div class="search-box default-padding d-flex align-items-center fade-in-up">
             <mat-form-field class="w-100">
               <input matInput placeholder="Search Location ..."  autocomplete="off" class="text-white"
               (keyup)="search($event)">
@@ -10,7 +10,7 @@
     </div>
 
     <!-- panel for display result of search : it apears if the input has value -->
-    <div class="result-of-search shadow-lg default-padding position-absolute rounded" 
+    <div class="result-of-search shadow-lg default-padding position-absolute rounded " 
     *ngIf="searchValue.length" >
 
     <!-- loading apears after send request to api -->
@@ -29,16 +29,20 @@
     <!-- end of search  -->
     
     <!-- suggested locations  -->
-    <div class="suggested-locations default-padding d-flex flex-column align-items-start" >
+    <div class="suggested-locations default-padding d-flex flex-column align-items-start fade-in-up" >
       <span class="text-white list-title"> Suggested Locations </span>
       <br>
-      <button class="button-effect" mat-button *ngFor="let sugestedLocation of suggestedLocations">
+      <button class="button-effect " (click)="getLocationWeather(sugestedLocation.woeid)"
+       mat-button *ngFor="let sugestedLocation of suggestedLocations">
         {{sugestedLocation.title}}  
       </button>
     </div>
     <!-- line -->
     <hr class="line-after-list">
 
-    <app-weather-details #detailsRef [weatherData] = 'weatherData'></app-weather-details>
+    <!--  weather details & more -->
+    <app-weather-details [weatherData] = 'weatherData'></app-weather-details>
 
 </div>
+
+<app-loading *ngIf="loading"></app-loading>

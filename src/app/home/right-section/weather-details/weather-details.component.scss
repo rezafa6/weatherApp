@@ -1,10 +1,20 @@
 @import '../../../../assets/variables';
 .weather-details-wrapper {
     border-bottom: 1px solid $white_color ;
+    transition: max-height 0.2s ease-out;
 }
 .weather-details-wrapper:nth-last-child(1) {
     border-bottom: none;
 }
 .w-details {
     padding: 12px 0;
+}
+
+.more {
+    max-height: 0;
+    transition: max-height 0.3s ease-out;
+}
+
+#moreBtn {
+    color: $orange_color !important;
 }

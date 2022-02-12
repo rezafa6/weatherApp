@@ -19,6 +19,7 @@ export class RightSectionComponent implements OnInit {
   searchLoadng: boolean = false;
   searchValue: string = '';
   weatherData: any ;
+  loading: boolean = false;
   constructor(
     private suggestService: SuggestService,
     private weatherHttpService: WeatherHttpService
@@ -56,29 +57,39 @@ export class RightSectionComponent implements OnInit {
   }
 
   searchLocationWitHttpService(value: string) {
-    this.searchLoadng = true
+    this.searchLoadng = true;
     this.weatherHttpService.getLocationDetailByName(value).then(
       res => {
         this.searchLoadng = false;
         let tempData:any = res;
         this.locationBasicData = tempData;
         // only show five items
-        this.locationBasicData  = this.locationBasicData.slice(0,5)
+        this.locationBasicData  = this.locationBasicData.slice(0,5);
       }
     )
   }
 
   getLocationWeather(woeid: any) {
+    this.loading = true;
     let woeidToSrt = woeid.toString()
    this.weatherHttpService.getLocationWeatherByWoeId(woeidToSrt).then(
     res => {
       console.log(res)
+      this.loading = false;
       let tempData: any = res;
       this.weatherData = tempData;
+      this.setExpandOptionForData()
+      console.log(this.weatherData , 'opop')
       // send data to parent : home component.ts
       this.emitDataFormHomeCoponent.emit(this.weatherData)
     }
   )
+  }
+
+  setExpandOptionForData() {
+   this.weatherData.consolidated_weather.forEach((item: { expand: boolean; }) => {
+    item.expand = false
+    });
   }
   initSugestedLocations() {
     this.suggestedLocations = this.suggestService.getSuggestedLocations()
@@ -86,4 +97,6 @@ export class RightSectionComponent implements OnInit {
   setDefaultLocation() {
   this.getLocationWeather(638242)
   }
+
+
 }

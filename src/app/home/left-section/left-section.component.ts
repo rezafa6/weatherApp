@@ -23,10 +23,10 @@ export class LeftSectionComponent implements OnInit {
       this.currentDay = 0
     } else {
       this.currentDay ++;
-    }
-    
+    } 
   }
 
+  
   goToPrevDay(currentDay: number) {
     if(currentDay <= 0) {
       this.currentDay = this.weatherData.consolidated_weather.length - 1
@@ -36,7 +36,7 @@ export class LeftSectionComponent implements OnInit {
   }
 
   initDateAndTime() {
-    const days = ['Sunday' ,'Monday', 'Tuesday' ,'Wednesday','Thursday','Friday','Saturday' ];
+    const days = ['SUN' ,'MON', 'TUE' ,'WED','THU','FRI','SAT' ];
     let date = new Date()
     this.today = days[date.getDay()].toUpperCase()
     this.time = `${date.getHours()}:${date.getMinutes()} `

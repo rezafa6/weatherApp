@@ -11,18 +11,21 @@ import { HomeComponent } from './home/home.component';
 import { LeftSectionComponent } from './home/left-section/left-section.component';
 import { RightSectionComponent } from './home/right-section/right-section.component';
 import { WeatherDetailsComponent } from './home/right-section/weather-details/weather-details.component';
+import { LoadingComponent } from './loading/loading.component';
 // material ui modules
 import {MatInputModule} from '@angular/material/input';
 import { MatFormFieldModule } from "@angular/material/form-field";
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
+
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     RightSectionComponent,
     LeftSectionComponent,
-    WeatherDetailsComponent
+    WeatherDetailsComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
