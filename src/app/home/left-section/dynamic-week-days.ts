@@ -19,29 +19,24 @@ export class DynamicDateService {
         let index = this.days.indexOf(this.today)
         if(index <= 0) {
           this.today = this.days[6]
-          index = 6
         }
         else if(index <= 6) {
             index = index - 1
           this.today = this.days[index]
         }
-
         return this.today
       }
 
     //dynamic days of week : increase
     goToNextDayOfWeek() {
         let index = this.days.indexOf(this.today)
-        // 
         if(index < 6) {
           index = index + 1
           this.today = this.days[index]
         }
         else if(index == 6) {
           this.today = this.days[0]
-          index = 0
         }
-
         return this.today
       }
 }

@@ -7,6 +7,17 @@ export class WeatherHttpService {
     constructor(private http: HttpClient) { }
     baseURL = environment.baseUrl
 
+
+
+ headerDict = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json',
+  'Access-Control-Allow-Headers': 'Content-Type',
+}
+requestOptions = {                                                                                                                                                                                 
+    headers: new Headers(this.headerDict), 
+  };
+
     getLocationDetailByName(locationName: string) {
         return new Promise((resolve, reject) => {
             this.http.get(this.baseURL + 'search/?query=' + locationName).subscribe(
